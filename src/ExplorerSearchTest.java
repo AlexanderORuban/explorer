@@ -20,6 +20,56 @@ public class ExplorerSearchTest {
         assertEquals(14, actual);
     }
 
+    @Test
+    public void testReachableArea_singleExplorer() {
+        int[][] island = {
+                { 0 }
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void testReachableArea_surroundedByObstacles() {
+        int[][] island = {
+                { 1, 1, 1, 3, 1, 1 },
+                { 3, 2, 3, 3, 3, 1 },
+                { 3, 0, 2, 1, 3, 3 },
+                { 3, 3, 2, 1, 1, 1 },
+                { 1, 1, 1, 2, 1, 1 },
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(1, actual);
+    }
+
+    @Test
+    public void testReachableArea_allReachable() {
+        int[][] island = {
+                { 1, 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1, 1 },
+                { 1, 1, 0, 1, 1, 1 },
+                { 1, 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1, 1 },
+        };
+        int actual = ExplorerSearch.reachableArea(island);
+        assertEquals(30, actual);
+    }
+
+    @Test
+    public void testReachableArea_noExplorer() {
+        int[][] island = {
+                { 1, 1, 1, 3, 1, 1 },
+                { 3, 2, 3, 3, 3, 1 },
+                { 3, 1, 2, 1, 3, 3 },
+                { 3, 3, 2, 1, 1, 1 },
+                { 1, 1, 1, 2, 1, 1 },
+        };
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ExplorerSearch.reachableArea(island);
+        });
+        assertEquals("No explorer is present", exception.getMessage());
+    }
+
     // Add more tests here!
     // Come up with varied cases
 
