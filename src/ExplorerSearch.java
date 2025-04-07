@@ -45,4 +45,45 @@ public class ExplorerSearch {
         }
         throw new IllegalArgumentException("No explorer is present");
     }
+
+    public static List<int[]> possibleMoves(int[][] island, int[] current) {
+        int currentRow = current[0];
+        int currentColumn = current[1];
+
+        List<int[]> moves = new ArrayList<>();
+
+        // Moving UP
+        int newRow = currentRow - 1;
+        int newColumn = currentColumn;
+
+        if (newRow >= 0 && island[newRow][newColumn] != 2 && island[newRow][newColumn] != 3) {
+            moves.add(new int[]{newRow, newColumn});
+        }
+
+        // Moving DOWN
+        newRow = currentRow + 1;
+        newColumn = currentColumn;
+
+        if (newRow < island.length && island[newRow][newColumn] != 2 && island[newRow][newColumn] != 3) {
+            moves.add(new int[]{newRow, newColumn});
+        }
+
+        // Moving LEFT
+        newRow = currentRow;
+        newColumn = currentColumn - 1;
+
+        if (newColumn >= 0 && island[newRow][newColumn] != 2 && island[newRow][newColumn] != 3) {
+            moves.add(new int[]{newRow, newColumn});
+        }
+
+        // Moving RIGHT
+        newRow = currentRow;
+        newColumn = currentColumn + 1;
+
+        if (newColumn < island[0].length && island[newRow][newColumn] != 2 && island[newRow][newColumn] != 3) {
+            moves.add(new int[]{newRow, newColumn});
+        }
+
+        return moves;
+    }
 }
